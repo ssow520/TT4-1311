@@ -14,6 +14,14 @@ export interface User {
   program?: string;
 }
 
+export interface SignupRequest {
+  name: string;
+  email: string;
+  password: string;
+  program: string;
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,6 +32,13 @@ export class AuthService {
 
   login(email: string, password: string): Observable<AuthResponse>{
     return this.http.post<AuthResponse>(`${this.API_URL}/auth/login`, {email, password})
+  }
+
+  signup(data: SignupRequest): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(
+      `${this.API_URL}/auth/signup`,
+      data
+    );
   }
 
 }
