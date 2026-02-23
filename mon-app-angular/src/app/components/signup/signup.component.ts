@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss'] // ← pluriel
+  styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
   name = '';
@@ -19,24 +18,18 @@ export class SignupComponent {
   errorMessage = '';
 
   constructor(
-    private readonly auth: AuthService,
+    private readonly authService: AuthService,
     private readonly router: Router
   ){}
 
   submit(){
-    this.auth.signup({
-      name: this.name,
-      email: this.email,
-      password: this.password,
-      program: this.program
-    }).subscribe({
-      next: (res)=>{
-        console.log(res);
-        this.router.navigate(['/login']);
+    this.authService.signup(this.email, this.email, this.password, this.program).subscribe({
+      next: ()=>{
+        this.router.navigate(['/login'])
       },
       error: (err)=>{
         console.log(err);
-        this.errorMessage = "Signup failed!";
+        this.errorMessage = err.error.error;
       }
     });
   }
