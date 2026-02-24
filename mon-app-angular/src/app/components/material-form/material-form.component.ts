@@ -46,10 +46,6 @@ export class MaterialFormComponent {
         this.semester = '';
         this.url = '';
       },
-      error: (err) => {
-        console.error('Erreur création Material :', err);
-        alert('Erreur lors de la création du Material');
-      }
     });
   }
 }
