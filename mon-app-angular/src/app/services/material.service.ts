@@ -40,4 +40,12 @@ export class MaterialService {
     console.log(this.authService.getAuthHeaders())
     return this.http.get<Material[]>(`${this.API_URL}/materials`, {headers: new HttpHeaders(this.authService.getAuthHeaders())});
   }
+
+  create(material: Partial<Material>): Observable<Material> {
+    return this.http.post<Material>(
+      `${this.API_URL}/materials`,
+      material,
+      {headers: new HttpHeaders(this.authService.getAuthHeaders())}
+    );
+  }
 }

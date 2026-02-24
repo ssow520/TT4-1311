@@ -1,1 +1,13 @@
-<p>material-form works!</p>
+<div class="material-form-container">
+    <h2>Créer un nouveau Material</h2>
+  
+    <input type="text" placeholder="Titre" [(ngModel)]="title">
+    <input type="text" placeholder="Code du cours" [(ngModel)]="course_code">
+    <input type="text" placeholder="Nom du cours" [(ngModel)]="course_name">
+    <input type="text" placeholder="Professeur" [(ngModel)]="professor">
+    <input type="text" placeholder="Session" [(ngModel)]="semester">
+    <input type="text" placeholder="URL" [(ngModel)]="url">
+    <textarea placeholder="Description" [(ngModel)]="description"></textarea>
+  
+    <button (click)="submitForm()">Créer Material</button>
+  </div>
